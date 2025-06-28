@@ -89,3 +89,40 @@ This document defines the database schema for the Airbnb system. The system incl
 - Relationship: Many-to-many (A user can send many messages and receive many messages, where the message contains a **sender** and **recipient**).
 
 ---
+
+
+## Constraints
+
+### User Table
+- **email**: Unique constraint (no two users can have the same email address).
+- **Non-null constraints**: For required fields like `first_name`, `last_name`, `email`, `password_hash`, `role`.
+
+### Property Table
+- **host_id**: Foreign key constraint, references `User(user_id)`.
+- **Non-null constraints**: For essential fields like `name`, `description`, `location`, `pricepernight`.
+
+### Booking Table
+- **status**: Must be one of the following values: `pending`, `confirmed`, `canceled`.
+- **Foreign key constraints**: `property_id` references `Property(property_id)`, `user_id` references `User(user_id)`.
+
+### Payment Table
+- **Foreign key constraints**: `booking_id` references `Booking(booking_id)`.
+
+### Review Table
+- **rating**: Must be between 1 and 5 (inclusive).
+- **Foreign key constraints**: `property_id` references `Property(property_id)`, `user_id` references `User(user_id)`.
+
+### Message Table
+- **Foreign key constraints**: `sender_id` and `recipient_id` both reference `User(user_id)`.
+
+---
+
+## Indexing
+
+- **Primary Keys**: Automatically indexed.
+- **Additional Indexes**: 
+  - `email` in the **User** table.
+  - `property_id` in the **Property** and **Booking** tables.
+  - `booking_id` in the **Booking** and **Payment** tables.
+
+---
