@@ -55,3 +55,37 @@ This document defines the database schema for the Airbnb system. The system incl
 - **recipient_id**: Foreign Key, references `User(user_id)`  
 - **message_body**: TEXT, NOT NULL  
 - **sent_at**: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP  
+
+---
+
+## Relationships
+
+### 1. User to Property
+- A **User** can be a **Host** of many **Properties**.
+- Relationship: One-to-many (One user can host multiple properties, but a property is hosted by only one user).
+
+### 2. User to Booking
+- A **User** can make multiple **Bookings**.
+- Relationship: One-to-many (One user can have many bookings, but each booking is made by one user).
+
+### 3. Property to Booking
+- A **Property** can have many **Bookings**.
+- Relationship: One-to-many (One property can have many bookings, but each booking is for one property).
+
+### 4. Booking to Payment
+- A **Booking** can have one or more **Payments**.
+- Relationship: One-to-many (One booking can have many payments, e.g., for different payment methods, or it could be a single payment).
+
+### 5. Property to Review
+- A **Property** can have many **Reviews**.
+- Relationship: One-to-many (One property can have many reviews, but each review is tied to one property).
+
+### 6. User to Review
+- A **User** can write many **Reviews**.
+- Relationship: One-to-many (One user can leave multiple reviews, but each review is written by only one user).
+
+### 7. User to Message
+- A **User** can send and receive many **Messages**.
+- Relationship: Many-to-many (A user can send many messages and receive many messages, where the message contains a **sender** and **recipient**).
+
+---
