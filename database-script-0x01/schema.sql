@@ -79,4 +79,4 @@ CREATE INDEX idx_payment_booking ON Payment(booking_id);  -- Index on Payment's 
 CREATE INDEX idx_review_property ON Review(property_id);  -- Index on Review's property_id
 CREATE INDEX idx_review_user ON Review(user_id);  -- Index on Review's user_id
 CREATE INDEX idx_message_sender ON Message(sender_id);  -- Index on Message's sender_id
-CREATE INDEX idx_message_recipient ON Message(recipient_id);  -- Index on Message's recipient_id or the user_id
+CREATE INDEX idx_message_recipient ON Message(recipient_id);  -- Index on Message's recipient_id or the user_id.md
