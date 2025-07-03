@@ -53,3 +53,22 @@ JOIN
     Property ON Booking.property_id = Property.property_id
 JOIN 
     Payment ON Booking.booking_id = Payment.booking_id;
+
+
+-- Step 3: Create indexes on high-usage columns to optimize query performance
+-- These indexes will speed up the joins and search operations in the query
+
+-- Index on user_id in Booking table to optimize JOIN operations
+CREATE INDEX idx_booking_user_id ON Booking(user_id);
+
+-- Index on property_id in Booking table to optimize JOIN operations
+CREATE INDEX idx_booking_property_id ON Booking(property_id);
+
+-- Index on user_id in User table to optimize JOIN operations
+CREATE INDEX idx_user_id ON User(user_id);
+
+-- Index on booking_id in Payment table to optimize JOIN operations
+CREATE INDEX idx_payment_booking_id ON Payment(booking_id);
+
+-- Index on property_id in Property table to optimize JOIN operations
+CREATE INDEX idx_property_id ON Property(property_id);
