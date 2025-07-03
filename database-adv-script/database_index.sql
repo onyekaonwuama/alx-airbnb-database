@@ -1,3 +1,5 @@
+-- Create indexes on high-usage columns
+
 -- Create index on user_id in Booking table to optimize JOIN operations
 CREATE INDEX idx_booking_user_id ON Booking(user_id);
 
@@ -27,3 +29,31 @@ CREATE INDEX idx_property_price ON Property(pricepernight);
 
 -- Create index on created_at in Property table to optimize queries ordering by creation date
 CREATE INDEX idx_property_created_at ON Property(created_at);
+
+-- Measure the performance before and after adding indexes using EXPLAIN ANALYZE
+
+-- Query to find confirmed bookings (before adding indexes)
+EXPLAIN ANALYZE 
+SELECT 
+    Booking.booking_id, 
+    User.first_name, 
+    User.last_name
+FROM 
+    Booking
+JOIN 
+    User ON Booking.user_id = User.user_id
+WHERE 
+    Booking.status = 'confirmed';
+
+-- Query to find confirmed bookings (after adding indexes)
+EXPLAIN ANALYZE 
+SELECT 
+    Booking.booking_id, 
+    User.first_name, 
+    User.last_name
+FROM 
+    Booking
+JOIN 
+    User ON Booking.user_id = User.user_id
+WHERE 
+    Booking.status = 'confirmed';
