@@ -25,7 +25,7 @@ Review.comment
 FROM
 Property
 LEFT JOIN Review
-ON Property.property_id = Review.property_id
+ON Property.property_id = Review.property_id;
 
 -- full outer join Retrieve all users and all bookings, even if the user has no booking or the booking has no user
 SELECT
