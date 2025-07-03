@@ -11,13 +11,14 @@ LEFT JOIN Booking
 GROUP BY 
     User.user_id;
 
--- Rank properties based on the total number of bookings they have received
+-- Rank properties based on the total number of bookings they have received using ROW_NUMBER and RANK
 SELECT 
     Property.property_id,
     Property.name,
     Property.location,
     COUNT(Booking.booking_id) AS total_bookings,
-    ROW_NUMBER() OVER (ORDER BY COUNT(Booking.booking_id) DESC) AS booking_rank
+    ROW_NUMBER() OVER (ORDER BY COUNT(Booking.booking_id) DESC) AS row_number_rank,
+    RANK() OVER (ORDER BY COUNT(Booking.booking_id) DESC) AS rank
 FROM 
     Property
 LEFT JOIN Booking
@@ -25,4 +26,4 @@ LEFT JOIN Booking
 GROUP BY 
     Property.property_id
 ORDER BY 
-    booking_rank;
+    rank;
