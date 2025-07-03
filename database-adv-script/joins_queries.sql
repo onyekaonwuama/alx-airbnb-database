@@ -26,3 +26,18 @@ FROM
 Property
 LEFT JOIN Review
 ON Property.property_id = Review.property_id
+
+-- full outer join Retrieve all users and all bookings, even if the user has no booking or the booking has no user
+SELECT
+    User.user_id,
+    User.first_name,
+    User.last_name,
+    User.email,
+    Booking.booking_id,
+    Booking.start_date,
+    Booking.end_date,
+    Booking.total_price
+FROM
+    User
+FULL OUTER JOIN Booking
+    ON User.user_id = Booking.user_id;
