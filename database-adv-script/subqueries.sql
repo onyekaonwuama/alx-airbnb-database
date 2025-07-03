@@ -17,3 +17,21 @@ WHERE
         HAVING
             AVG(Review.rating) > 4.0
     );
+
+-- find users who have made more than 3 bookings
+SELECT
+    User.user_id,
+    User.first_name,
+    User.last_name,
+    User.email
+FROM
+    User
+WHERE
+    (
+        SELECT
+            COUNT(*)
+        FROM
+            Booking
+        WHERE
+            Booking.user_id = User.user_id
+    ) > 3;
