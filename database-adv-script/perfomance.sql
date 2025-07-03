@@ -72,3 +72,32 @@ CREATE INDEX idx_payment_booking_id ON Payment(booking_id);
 
 -- Index on property_id in Property table to optimize JOIN operations
 CREATE INDEX idx_property_id ON Property(property_id);
+
+-- Step 4: Optimized query after adding indexes and refactoring the JOINs
+-- This query uses a LEFT JOIN for Payment to include bookings with or without payments
+-- The added indexes will make this query run faster
+
+SELECT 
+    Booking.booking_id,
+    Booking.start_date,
+    Booking.end_date,
+    Booking.total_price,
+    User.user_id,
+    User.first_name,
+    User.last_name,
+    User.email,
+    Property.property_id,
+    Property.name AS property_name,
+    Property.location AS property_location,
+    Property.pricepernight,
+    Payment.payment_id,
+    Payment.amount AS payment_amount,
+    Payment.payment_date
+FROM 
+    Booking
+JOIN 
+    User ON Booking.user_id = User.user_id
+JOIN 
+    Property ON Booking.property_id = Property.property_id
+LEFT JOIN 
+    Payment ON Booking.booking_id = Payment.booking_id;
