@@ -21,7 +21,7 @@ This document provides a comparison of query performance before and after creati
 ### 1. **Before Indexing**:
 - Query to find confirmed bookings:
     ```sql
-    EXPLAIN 
+    EXPLAIN ANALYZE 
     SELECT 
         Booking.booking_id, 
         User.first_name, 
@@ -34,12 +34,12 @@ This document provides a comparison of query performance before and after creati
         Booking.status = 'confirmed';
     ```
 
-    - **Execution Plan**: (Include output from the `EXPLAIN` command)
+    - **Execution Plan**: (Include output from the `EXPLAIN ANALYZE` command here)
 
 ### 2. **After Indexing**:
 - Query to find confirmed bookings (after adding indexes):
     ```sql
-    EXPLAIN 
+    EXPLAIN ANALYZE 
     SELECT 
         Booking.booking_id, 
         User.first_name, 
@@ -52,11 +52,14 @@ This document provides a comparison of query performance before and after creati
         Booking.status = 'confirmed';
     ```
 
-    - **Execution Plan**: (Include output from the `EXPLAIN` command after indexing)
+    - **Execution Plan**: (Include output from the `EXPLAIN ANALYZE` command after indexing)
 
 ## Performance Improvement:
-- **Before indexing**: (Describe the performance, e.g., slow response, high cost)
-- **After indexing**: (Describe the improvements, e.g., faster response, reduced query cost)
+- **Before indexing**: (Describe the performance, e.g., slow response, high cost, and query execution time)
+- **After indexing**: (Describe the improvements, e.g., faster response, reduced query cost, and query execution time)
 
 ---
 
+## License:
+
+This project is open-source under the MIT License.
