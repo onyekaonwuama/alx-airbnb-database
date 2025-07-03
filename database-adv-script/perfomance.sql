@@ -1,4 +1,7 @@
 -- Initial query to retrieve all bookings along with user, property, and payment details
+-- This query may not perform well due to lack of indexing
+
+-- Original Query (before optimization)
 SELECT 
     Booking.booking_id,
     Booking.start_date,
