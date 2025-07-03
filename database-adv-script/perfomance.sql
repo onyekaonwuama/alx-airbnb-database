@@ -1,7 +1,6 @@
--- Initial query to retrieve all bookings along with user, property, and payment details
--- This query may not perform well due to lack of indexing
+-- Step 1: Original query to retrieve all bookings along with user, property, and payment details
+-- Adding WHERE clause to filter bookings (e.g., retrieving confirmed bookings within a specific date range)
 
--- Original Query (before optimization)
 SELECT 
     Booking.booking_id,
     Booking.start_date,
@@ -25,7 +24,11 @@ JOIN
 JOIN 
     Property ON Booking.property_id = Property.property_id
 JOIN 
-    Payment ON Booking.booking_id = Payment.booking_id;
+    Payment ON Booking.booking_id = Payment.booking_id
+WHERE 
+    Booking.status = 'confirmed'  -- Adding WHERE clause to filter confirmed bookings
+    AND Booking.start_date >= '2023-01-01'  -- Example filter for bookings starting from January 2023
+    AND Booking.end_date <= '2023-12-31';  -- Example filter for bookings ending by December 2023
 
 -- Step 2: Measure the performance of the original query using EXPLAIN ANALYZE (before optimization)
 EXPLAIN ANALYZE 
@@ -52,7 +55,11 @@ JOIN
 JOIN 
     Property ON Booking.property_id = Property.property_id
 JOIN 
-    Payment ON Booking.booking_id = Payment.booking_id;
+    Payment ON Booking.booking_id = Payment.booking_id
+WHERE 
+    Booking.status = 'confirmed'
+    AND Booking.start_date >= '2023-01-01'
+    AND Booking.end_date <= '2023-12-31';
 
 
 -- Step 3: Create indexes on high-usage columns to optimize query performance
